@@ -61,8 +61,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fab_fraccion_mas = (FloatingActionButton)findViewById(R.id.fab_fraccion_mas);
         fab_fraccion_menos = (FloatingActionButton)findViewById(R.id.fab_fraccion_menos);
 
-        tv_entero = findViewById(R.id.tv_entero);
-        tv_fraccion = findViewById(R.id.tv_fraccion);
+        tv_entero = findViewById(R.id.et_entero);
+        tv_fraccion = findViewById(R.id.et_fraccion);
 
         this.vCantEntero = 0;
         this.vCantFraccion = 0;
