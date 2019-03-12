@@ -9,10 +9,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="170dp"
+        android:layout_height="0dp"
         android:paddingRight="10dp"
         android:paddingLeft="10dp"
         android:background="@color/colorPrimaryDark"
+        android:layout_weight="3"
         android:orientation="vertical">
 
         <LinearLayout
@@ -24,10 +25,11 @@
                 android:id="@+id/et_codProd"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
-                android:textColorHint="@color/colorWhite"
+                android:textColorHint="@color/colorSuave"
                 android:backgroundTint="@color/colorWhite"
                 android:textColor="@color/colorWhite"
-                android:hint="@string/hint_codproducto" />
+                android:hint="@string/hint_codproducto"
+                />
 
             <Button
                 android:layout_width="wrap_content"
@@ -60,11 +62,10 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:textSize="25dp"
-                android:textColorHint="@color/colorWhite"
+                android:textColorHint="@color/colorSuave"
                 android:backgroundTint="@color/colorWhite"
                 android:textColor="@color/colorWhite"
-                android:hint="0"
-                android:text="0"
+                android:hint="@string/hint_cero"
                 android:textAlignment="center"
                  />
 
@@ -128,10 +129,11 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="220dp"
+        android:layout_height="0dp"
         android:paddingTop="10dp"
         android:paddingRight="18dp"
         android:paddingLeft="18dp"
+        android:layout_weight="4"
         android:orientation="vertical">
 
         <TextView
@@ -163,8 +165,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:layout_gravity="center|right"
-                    android:backgroundTint="@color/colorAccent"
-                    app:srcCompat="@drawable/ic_add_black_70dp" />
+                    android:src="@drawable/minus_48"/>
             </FrameLayout>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -177,7 +178,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:hint="@string/hint_cantidad"
-                    android:text="0"
                     android:textAlignment="center"
                     android:textSize="35dp" />
 
@@ -228,8 +228,7 @@
                     android:layout_height="wrap_content"
                     android:clickable="true"
                     android:layout_gravity="center|right"
-                    android:backgroundTint="@color/colorAccent"
-                    app:srcCompat="@drawable/ic_add_black_70dp" />
+                    android:src="@drawable/minus_48"/>
             </FrameLayout>
             <FrameLayout
                 android:layout_width="match_parent"
@@ -241,8 +240,7 @@
                     android:layout_width="70dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:hint="@string/hint_cantidad"
-                    android:text="0"
+                    android:hint="@string/hint_cero"
                     android:textAlignment="center"
                     android:textSize="35dp" />
             </FrameLayout>
@@ -269,7 +267,8 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:orientation="horizontal">
 
         <Button
