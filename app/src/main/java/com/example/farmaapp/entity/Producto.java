@@ -2,67 +2,87 @@ package com.example.farmaapp.entity;
 
 public class Producto {
 
-    private String codigo;
-    private String Nombre;
-    private String anaquel;
-    private String anaquelTodos;
-    private String cantEntero;
-    private String cantFraccion;
+    private String coProducto;
+    private String deProducto;
+    private String deUnidad;
+    private String deUnidadFraccion;
+    private String inProdFraccionado;
+    private Integer vaFraccion;
+    private String coLaboratorio;
+    private String deLaboratorio;
 
-    public Producto(String codigo, String nombre, String anaquel, String cantEntero, String cantFraccion) {
-        this.codigo = codigo;
-        this.Nombre = nombre;
-        this.anaquel = anaquel;
-        //this.anaquelTodos = anaquelTodos;
-        this.cantEntero = cantEntero;
-        this.cantFraccion = cantFraccion;
+    public Producto(String coProducto, String deProducto, String deUnidad, String deUnidadFraccion, String inProdFraccionado, Integer vaFraccion, String coLaboratorio, String deLaboratorio) {
+        this.coProducto = coProducto;
+        this.deProducto = deProducto;
+        this.deUnidad = deUnidad;
+        this.deUnidadFraccion = deUnidadFraccion;
+        this.inProdFraccionado = inProdFraccionado;
+        this.vaFraccion = vaFraccion;
+        this.coLaboratorio = coLaboratorio;
+        this.deLaboratorio = deLaboratorio;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getCoProducto() {
+        return coProducto;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setCoProducto(String coProducto) {
+        this.coProducto = coProducto;
     }
 
-    public String getNombre() {
-        return Nombre;
+    public String getDeProducto() {
+        return deProducto;
     }
 
-    public void setNombre(String nombre) {
-        Nombre = nombre;
+    public void setDeProducto(String deProducto) {
+        this.deProducto = deProducto;
     }
 
-    public String getAnaquel() {
-        return anaquel;
+    public String getDeUnidad() {
+        return deUnidad;
     }
 
-    public void setAnaquel(String anaquel) {
-        this.anaquel = anaquel;
+    public void setDeUnidad(String deUnidad) {
+        this.deUnidad = deUnidad;
     }
 
-    public String getAnaquelTodos() {
-        return anaquelTodos;
+    public String getDeUnidadFraccion() {
+        return deUnidadFraccion;
     }
 
-    public void setAnaquelTodos(String anaquelTodos) {
-        this.anaquelTodos = anaquelTodos;
+    public void setDeUnidadFraccion(String deUnidadFraccion) {
+        this.deUnidadFraccion = deUnidadFraccion;
     }
 
-    public String getCantEntero() {
-        return cantEntero;
+    public String getInProdFraccionado() {
+        return inProdFraccionado;
     }
 
-    public void setCantEntero(String cantEntero) {
-        this.cantEntero = cantEntero;
+    public void setInProdFraccionado(String inProdFraccionado) {
+        this.inProdFraccionado = inProdFraccionado;
     }
 
-    public String getCantFraccion() {
-        return cantFraccion;
+    public Integer getVaFraccion() {
+        return vaFraccion;
     }
 
-    public void setCantFraccion(String cantFraccion) {
-        this.cantFraccion = cantFraccion;
+    public void setVaFraccion(Integer vaFraccion) {
+        this.vaFraccion = vaFraccion;
+    }
+
+    public String getCoLaboratorio() {
+        return coLaboratorio;
+    }
+
+    public void setCoLaboratorio(String coLaboratorio) {
+        this.coLaboratorio = coLaboratorio;
+    }
+
+    public String getDeLaboratorio() {
+        return deLaboratorio;
+    }
+
+    public void setDeLaboratorio(String deLaboratorio) {
+        this.deLaboratorio = deLaboratorio;
     }
 }

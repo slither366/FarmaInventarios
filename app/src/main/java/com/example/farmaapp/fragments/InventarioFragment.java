@@ -10,10 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.farmaapp.R;
 import com.example.farmaapp.adapter.InventarioAdapter;
 import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoInventario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,14 +23,14 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class InventarioFragment extends Fragment {
+public class InventarioFragment extends Fragment{
 
     RecyclerView rv_inventario;
+    InventarioAdapter adapter;
 
     public InventarioFragment() {
-        // Required empty public constructor
-    }
 
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -43,21 +45,27 @@ public class InventarioFragment extends Fragment {
 
         rv_inventario = view.findViewById(R.id.rv_inventario);
 
-        InventarioAdapter adapter = new InventarioAdapter(obtenerProductos());
+        adapter = new InventarioAdapter(obtenerProductos());
 
         rv_inventario.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_inventario.setAdapter(adapter);
 
     }
 
-    private List<Producto> obtenerProductos(){
-        List<Producto> productos = new ArrayList<>();
-        Producto producto1 = new Producto("010934","Perplus","31","10","2");
-        Producto producto2 = new Producto("010584","Vitaminas","32","150","30");
-        Producto producto3 = new Producto("010134","Gentamisina","30","13","1");
-        Producto producto4 = new Producto("010988","Panadol","11","15","2");
-        Producto producto5 = new Producto("010994","VipVaporup","77","33","3");
-        Producto producto6 = new Producto("010155","Condones","3","72","1");
+    private List<ProductoInventario> obtenerProductos(){
+        List<ProductoInventario> productos = new ArrayList<>();
+        ProductoInventario producto1 = new ProductoInventario("010645","0453",
+                "N",0,2,0,"65");
+        ProductoInventario producto2 = new ProductoInventario("010633","0453",
+                "N",0,2,0,"65");
+        ProductoInventario producto3 = new ProductoInventario("010642","0453",
+                "N",0,2,0,"65");
+        ProductoInventario producto4 = new ProductoInventario("010637","0453",
+                "N",0,2,0,"65");
+        ProductoInventario producto5 = new ProductoInventario("011372","0453",
+                "N",0,2,0,"65");
+        ProductoInventario producto6 = new ProductoInventario("426651","0453",
+                "N",0,2,0,"65");
 
         productos.add(producto1);
         productos.add(producto2);
@@ -68,4 +76,14 @@ public class InventarioFragment extends Fragment {
 
         return productos;
     }
+    /*
+    private void eliminarUltimaFila(){
+        adapter.eliminarUltimoProducto();
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onClick(View view) {
+        eliminarUltimaFila();
+    }*/
 }

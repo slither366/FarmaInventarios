@@ -1,4 +1,4 @@
-package com.example.farmaapp;
+package com.example.farmaapp.activity;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.example.farmaapp.R;
 import com.example.farmaapp.fragments.ConteoFragment;
 import com.example.farmaapp.fragments.InventarioFragment;
 import com.example.farmaapp.fragments.VpAdapter;

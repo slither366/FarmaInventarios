@@ -69,6 +69,7 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
 
     FloatingActionButton fab_entero_menos, fab_entero_mas, fab_fraccion_menos, fab_fraccion_mas;
     EditText et_entero, et_fraccion, et_anaquel, et_codProd;
+    Button btn_guardar, btn_cancelar;
 
     private EMDKManager emdkManager = null;
     private BarcodeManager barcodeManager = null;
@@ -142,6 +143,9 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
         et_codScaneado = (EditText) v.findViewById(R.id.et_codScaneado);
         spinnerScannerDevices = (Spinner) v.findViewById(R.id.spinnerScannerDevices);
 
+        //btn_cancelar = (Button) v.findViewById(R.id.btn_cancelar);
+        //btn_guardar = (Button) v.findViewById(R.id.btn_guardar);
+
         this.vCantEntero = 0;
         this.vCantFraccion = 0;
 
@@ -200,6 +204,12 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
 
         //this.tv_entero.setText(this.vCantEntero);
         //this.tv_fraccion.setText(this.vCantFraccion);
+
+    }
+
+    private void agregarProducto() {
+
+
 
     }
 

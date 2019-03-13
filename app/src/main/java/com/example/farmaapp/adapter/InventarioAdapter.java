@@ -9,15 +9,20 @@ import android.widget.TextView;
 
 import com.example.farmaapp.R;
 import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoInventario;
 
 import java.util.List;
 
 public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.ViewHolder>{
 
-    List<Producto> productos;
+    List<ProductoInventario> productos;
 
-    public InventarioAdapter(List<Producto> producto) {
+    public InventarioAdapter(List<ProductoInventario> producto) {
         this.productos = producto;
+    }
+
+    public void eliminarUltimoProducto(){
+        productos.remove(productos.size()-1);
     }
 
     @NonNull
@@ -30,13 +35,13 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        Producto producto = productos.get(i);
+        ProductoInventario producto = productos.get(i);
 
-        viewHolder.tv_codigo.setText(producto.getCodigo());
-        viewHolder.tv_nombre.setText(producto.getNombre());
-        viewHolder.tv_anaquel.setText(producto.getAnaquel());
-        viewHolder.tv_entero.setText(producto.getCantEntero());
-        viewHolder.tv_fraccion.setText(producto.getCantFraccion());
+        viewHolder.tv_codigo.setText(producto.getCoProducto());
+        viewHolder.tv_nombre.setText("nombre...");
+        viewHolder.tv_anaquel.setText(producto.getNuAnaquelConcat());
+        viewHolder.tv_entero.setText(producto.getCaEntero().toString());
+        viewHolder.tv_fraccion.setText(producto.getCaFraccion().toString());
     }
 
     @Override
