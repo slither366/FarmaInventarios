@@ -22,7 +22,7 @@
             android:layout_height="45dp">
 
             <EditText
-                android:id="@+id/et_codProd"
+                android:id="@+id/et_codScaneado"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
                 android:textColorHint="@color/colorSuave"
@@ -32,6 +32,7 @@
                 />
 
             <Button
+                android:id="@+id/buttonScan"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:background="@drawable/ic_check_24dp"/>
@@ -260,6 +261,15 @@
 
             </FrameLayout>
 
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Spinner
+                android:id="@+id/spinnerScannerDevices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
         </LinearLayout>
 
 
