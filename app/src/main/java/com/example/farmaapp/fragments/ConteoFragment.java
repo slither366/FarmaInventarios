@@ -3,6 +3,7 @@ package com.example.farmaapp.fragments;
 
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.text.InputType;
@@ -145,12 +146,12 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
         et_fraccion = v.findViewById(R.id.et_fraccion);
         et_anaquel = v.findViewById(R.id.et_anaquel);
         et_codProd = v.findViewById(R.id.et_codScaneado);
-
-        et_entero.setInputType(InputType.TYPE_NULL);
-        et_anaquel.setInputType(InputType.TYPE_NULL);
-        et_fraccion.setInputType(InputType.TYPE_NULL);
-        et_codProd.setInputType(InputType.TYPE_NULL);
-
+/*
+        et_entero.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        et_anaquel.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        et_fraccion.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+        et_codProd.setInputType(InputType.TYPE_NUMBER_VARIATION_PASSWORD);
+*/
         tv_codigo = v.findViewById(R.id.tv_codigo);
         tv_nombre = v.findViewById(R.id.tv_nombre);
         tv_entero_antes = v.findViewById(R.id.tv_entero_antes);
@@ -182,22 +183,33 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
     @Override
     public void onClick(View v) {
 
+        this.vCantEntero = Integer.parseInt(et_entero.getText().toString());
+        this.vCantFraccion = Integer.parseInt(et_fraccion.getText().toString());
+
         switch (v.getId()){
 
             case R.id.fab_entero_mas:
-                aumentarUnEntero();
+                if(this.vCantEntero<1000) {
+                    aumentarUnEntero();
+                }
                 break;
 
             case R.id.fab_entero_menos:
-                disminuirUnEntero();
+                if(this.vCantEntero>0) {
+                    disminuirUnEntero();
+                }
                 break;
 
             case R.id.fab_fraccion_mas:
-                aumentarUnaFraccion();
+                if(this.vCantFraccion<1000) {
+                    aumentarUnaFraccion();
+                }
                 break;
 
             case R.id.fab_fraccion_menos:
-                disminuirUnaFraccion();
+                if(this.vCantFraccion>0) {
+                    disminuirUnaFraccion();
+                }
                 break;
 
             case R.id.et_entero:
@@ -230,24 +242,31 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
     }
 
     private void aumentarUnEntero() {
-        //this.vCantEntero =
         this.vCantEntero = this.vCantEntero + 1;
         this.et_entero.setText(this.vCantEntero + "");
+        et_entero.requestFocus();
+        et_entero.selectAll();
     }
 
     private void disminuirUnEntero() {
         this.vCantEntero = this.vCantEntero - 1;
         this.et_entero.setText(this.vCantEntero + "");
+        et_entero.requestFocus();
+        et_entero.selectAll();
     }
 
     private void aumentarUnaFraccion() {
         this.vCantFraccion = this.vCantFraccion + 1;
         this.et_fraccion.setText(this.vCantFraccion + "");
+        et_fraccion.requestFocus();
+        et_fraccion.selectAll();
     }
     
     private void disminuirUnaFraccion() {
         this.vCantFraccion = this.vCantFraccion - 1;
         this.et_fraccion.setText(this.vCantFraccion + "");
+        et_fraccion.requestFocus();
+        et_fraccion.selectAll();
     }
 
     @Override
@@ -539,10 +558,11 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
             public void run() {
                 if (result != null) {
                     et_codScaneado.setText(result);
-                    et_codScaneado.requestFocus();
-                    et_codScaneado.selectAll();
+                    //et_codScaneado.requestFocus();
+                    //et_codScaneado.selectAll();
                     //Toast.makeText(getContext(), "Producto no Encontrado!", Toast.LENGTH_SHORT);
                     buscarCodBarra(result);
+                    //et_entero.selectAll();
                 }
             }
         });
@@ -552,11 +572,13 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
 
         ProductoBarra productoBarra = database.getProductoBarraDao().getProductoWithBarra(codBarra);
 
-        if(!productoBarra.equals(null)){
+        if(productoBarra!=null){
             String codProd = productoBarra.getCoProducto();
-
             actualizarDatos(codProd);
         }else{
+            et_codScaneado.setText(codBarra);
+            ocultarBotones();
+            vaciarCampos();
             return;
         }
 
@@ -566,13 +588,61 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
 
         Producto datosProducto = database.getProductoDao().getProductoWithCodigo(codProducto);
 
-        if(!datosProducto.equals(null)){
+        if(datosProducto!=null){
+            this.vCantEntero = 0;
+            this.vCantFraccion = 0;
+
             tv_codigo.setText(datosProducto.getCoProducto());
             tv_nombre.setText(datosProducto.getDeProducto());
+            et_entero.setText("0");
+            et_fraccion.setText("0");
+            et_anaquel.setText("0");
+            et_entero.requestFocus();
+            et_entero.selectAll();
+
+            mostrarBotones();
+            enableETCantidades();
         }else{
+            ocultarBotones();
+            vaciarCampos();
+            disableETCantidades();
             return;
         }
     }
+
+    private void disableETCantidades() {
+        et_entero.setEnabled(false);
+        et_fraccion.setEnabled(false);
+        et_anaquel.setEnabled(false);
+    }
+
+    private void enableETCantidades() {
+        et_entero.setEnabled(true);
+        et_fraccion.setEnabled(true);
+        et_anaquel.setEnabled(true);
+    }
+
+
+    private void vaciarCampos() {
+        //et_codScaneado.setText("");
+        tv_nombre.setText("");
+        tv_codigo.setText("");
+    }
+
+    private void ocultarBotones() {
+        fab_entero_mas.hide();
+        fab_entero_menos.hide();
+        fab_fraccion_mas.hide();
+        fab_fraccion_menos.hide();
+    }
+
+    private void mostrarBotones() {
+        fab_entero_mas.show();
+        fab_entero_menos.show();
+        fab_fraccion_mas.show();
+        fab_fraccion_menos.show();
+    }
+
 
     private void setDefaultOrientation(){
         DisplayMetrics dm = new DisplayMetrics();
