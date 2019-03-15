@@ -10,19 +10,20 @@ import android.widget.TextView;
 import com.example.farmaapp.R;
 import com.example.farmaapp.entity.Producto;
 import com.example.farmaapp.entity.ProductoInventario;
+import com.example.farmaapp.entity.ProductoInventario;
 
 import java.util.List;
 
 public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.ViewHolder>{
 
-    List<ProductoInventario> productos;
+    List<ProductoInventario> productosInventario;
 
-    public InventarioAdapter(List<ProductoInventario> producto) {
-        this.productos = producto;
+    public InventarioAdapter(List<ProductoInventario> ProductoInventario) {
+        this.productosInventario = ProductoInventario;
     }
 
     public void eliminarUltimoProducto(){
-        productos.remove(productos.size()-1);
+        productosInventario.remove(productosInventario.size()-1);
     }
 
     @NonNull
@@ -35,18 +36,18 @@ public class InventarioAdapter extends RecyclerView.Adapter<InventarioAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
-        ProductoInventario producto = productos.get(i);
+        ProductoInventario ProductoInventario = productosInventario.get(i);
 
-        viewHolder.tv_codigo.setText(producto.getCoProducto());
-        viewHolder.tv_nombre.setText("nombre...");
-        viewHolder.tv_anaquel.setText(producto.getNuAnaquelConcat());
-        viewHolder.tv_entero.setText(producto.getCaEntero().toString());
-        viewHolder.tv_fraccion.setText(producto.getCaFraccion().toString());
+        viewHolder.tv_codigo.setText(ProductoInventario.getCoproducto());
+        viewHolder.tv_nombre.setText(ProductoInventario.getDeproducto());
+        viewHolder.tv_anaquel.setText(ProductoInventario.getNuAnaquelConcat());
+        viewHolder.tv_entero.setText(ProductoInventario.getCaEntero().toString());
+        viewHolder.tv_fraccion.setText(ProductoInventario.getCaFraccion().toString());
     }
 
     @Override
     public int getItemCount() {
-        return productos.size();
+        return productosInventario.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{

@@ -1,26 +1,45 @@
 package com.example.farmaapp.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "producto")
 public class Producto {
 
+    @PrimaryKey
+    @ColumnInfo(name = "co_producto")
+    @NonNull
     private String coProducto;
-    private String deProducto;
-    private String deUnidad;
-    private String deUnidadFraccion;
-    private String inProdFraccionado;
-    private Integer vaFraccion;
-    private String coLaboratorio;
-    private String deLaboratorio;
 
-    public Producto(String coProducto, String deProducto, String deUnidad, String deUnidadFraccion, String inProdFraccionado, Integer vaFraccion, String coLaboratorio, String deLaboratorio) {
-        this.coProducto = coProducto;
-        this.deProducto = deProducto;
-        this.deUnidad = deUnidad;
-        this.deUnidadFraccion = deUnidadFraccion;
-        this.inProdFraccionado = inProdFraccionado;
-        this.vaFraccion = vaFraccion;
-        this.coLaboratorio = coLaboratorio;
-        this.deLaboratorio = deLaboratorio;
-    }
+    @ColumnInfo(name = "de_producto")
+    @NonNull
+    private String deProducto;
+
+    @ColumnInfo(name = "de_unidad")
+    @NonNull
+    private String deUnidad;
+
+    @ColumnInfo(name = "de_unidad_fraccion")
+    @NonNull
+    private String deUnidadFraccion;
+
+    @ColumnInfo(name = "in_prod_fraccionado")
+    @NonNull
+    private String inProdFraccionado;
+
+    @ColumnInfo(name = "va_fraccion")
+    @NonNull
+    private Integer vaFraccion;
+
+    @ColumnInfo(name = "co_laboratorio")
+    @NonNull
+    private String coLaboratorio;
+
+    @ColumnInfo(name = "de_laboratorio")
+    @NonNull
+    private String deLaboratorio;
 
     public String getCoProducto() {
         return coProducto;

@@ -1,6 +1,7 @@
 package com.example.farmaapp.fragments;
 
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -10,14 +11,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.example.farmaapp.R;
 import com.example.farmaapp.adapter.InventarioAdapter;
+import com.example.farmaapp.db.AppDatabase;
 import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoBarra;
 import com.example.farmaapp.entity.ProductoInventario;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,6 +28,7 @@ public class InventarioFragment extends Fragment{
 
     RecyclerView rv_inventario;
     InventarioAdapter adapter;
+    AppDatabase database;
 
     public InventarioFragment() {
 
@@ -45,13 +47,22 @@ public class InventarioFragment extends Fragment{
 
         rv_inventario = view.findViewById(R.id.rv_inventario);
 
-        adapter = new InventarioAdapter(obtenerProductos());
+        database = Room.databaseBuilder(getContext(), AppDatabase.class, "eckerd")
+                .allowMainThreadQueries()
+                .build();
+
+        List<ProductoBarra> list_prodBarra = database.getProductoBarraDao().getProductoBarra();
+
+        List<ProductoInventario> list_prodInventario = (List<ProductoInventario>) database.getProductoInventarioDao().getProductoInventario();
+
+        adapter = new InventarioAdapter(list_prodInventario);
 
         rv_inventario.setLayoutManager(new LinearLayoutManager(getContext()));
         rv_inventario.setAdapter(adapter);
 
-    }
 
+    }
+/*
     private List<ProductoInventario> obtenerProductos(){
         List<ProductoInventario> productos = new ArrayList<>();
         ProductoInventario producto1 = new ProductoInventario("010645","0453",
@@ -75,7 +86,7 @@ public class InventarioFragment extends Fragment{
         productos.add(producto6);
 
         return productos;
-    }
+    }*/
     /*
     private void eliminarUltimaFila(){
         adapter.eliminarUltimoProducto();

@@ -1,6 +1,7 @@
 package com.example.farmaapp.fragments;
 
 
+import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.farmaapp.db.AppDatabase;
+import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoBarra;
 import com.symbol.emdk.EMDKManager;
 import com.symbol.emdk.EMDKResults;
 import com.symbol.emdk.EMDKManager.EMDKListener;
@@ -55,6 +59,7 @@ import android.content.pm.ActivityInfo;
 
 import com.example.farmaapp.R;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -69,7 +74,10 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
 
     FloatingActionButton fab_entero_menos, fab_entero_mas, fab_fraccion_menos, fab_fraccion_mas;
     EditText et_entero, et_fraccion, et_anaquel, et_codProd;
+    TextView tv_codigo, tv_nombre, tv_entero_antes, tv_fraccion_antes;
     Button btn_guardar, btn_cancelar;
+
+    AppDatabase database;
 
     private EMDKManager emdkManager = null;
     private BarcodeManager barcodeManager = null;
@@ -118,6 +126,9 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
         }
         addSpinnerScannerDevicesListener();
 
+        database = Room.databaseBuilder(getContext(), AppDatabase.class, "eckerd")
+                .allowMainThreadQueries()
+                .build();
 
         return v;
 
@@ -139,6 +150,11 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
         et_anaquel.setInputType(InputType.TYPE_NULL);
         et_fraccion.setInputType(InputType.TYPE_NULL);
         et_codProd.setInputType(InputType.TYPE_NULL);
+
+        tv_codigo = v.findViewById(R.id.tv_codigo);
+        tv_nombre = v.findViewById(R.id.tv_nombre);
+        tv_entero_antes = v.findViewById(R.id.tv_entero_antes);
+        tv_fraccion_antes = v.findViewById(R.id.tv_fraccion_antes);
 
         et_codScaneado = (EditText) v.findViewById(R.id.et_codScaneado);
         spinnerScannerDevices = (Spinner) v.findViewById(R.id.spinnerScannerDevices);
@@ -516,6 +532,7 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
         });
     }
 
+    // Setea el codigo de barras leido
     private void updateData(final String result){
         getActivity().runOnUiThread(new Runnable() {
             @Override
@@ -524,9 +541,37 @@ public class ConteoFragment extends Fragment implements View.OnClickListener,EMD
                     et_codScaneado.setText(result);
                     et_codScaneado.requestFocus();
                     et_codScaneado.selectAll();
+                    //Toast.makeText(getContext(), "Producto no Encontrado!", Toast.LENGTH_SHORT);
+                    buscarCodBarra(result);
                 }
             }
         });
+    }
+
+    private void buscarCodBarra(String codBarra) {
+
+        ProductoBarra productoBarra = database.getProductoBarraDao().getProductoWithBarra(codBarra);
+
+        if(!productoBarra.equals(null)){
+            String codProd = productoBarra.getCoProducto();
+
+            actualizarDatos(codProd);
+        }else{
+            return;
+        }
+
+    }
+
+    private void actualizarDatos(String codProducto) {
+
+        Producto datosProducto = database.getProductoDao().getProductoWithCodigo(codProducto);
+
+        if(!datosProducto.equals(null)){
+            tv_codigo.setText(datosProducto.getCoProducto());
+            tv_nombre.setText(datosProducto.getDeProducto());
+        }else{
+            return;
+        }
     }
 
     private void setDefaultOrientation(){

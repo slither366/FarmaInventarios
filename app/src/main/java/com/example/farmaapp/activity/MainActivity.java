@@ -1,5 +1,6 @@
 package com.example.farmaapp.activity;
 
+import android.arch.persistence.room.Room;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -10,9 +11,14 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.farmaapp.R;
+import com.example.farmaapp.db.AppDatabase;
+import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoBarra;
 import com.example.farmaapp.fragments.ConteoFragment;
 import com.example.farmaapp.fragments.InventarioFragment;
 import com.example.farmaapp.fragments.VpAdapter;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity{
 

@@ -1,36 +1,33 @@
 package com.example.farmaapp.dao;
 
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
-import com.example.farmaapp.db.InventarioDatabase;
-import com.example.farmaapp.entity.Producto;
+import com.example.farmaapp.entity.ProductoBarra;
+import com.example.farmaapp.entity.ProductoInventario;
 
-public class ProductoInventarioDAO {
+import java.util.List;
 
-    private static String NOMBRE_TABLA = "Producto";
+@Dao
+public interface ProductoInventarioDAO {
 
-    private static String COL_CODPRODUCTO = "co_producto";
-    private static String COL_DESPRODUCTO = "de_producto";
-    private static String COL_UNIDAD = "de_unidad";
-    private static String COL_UNIDADFRACCION = "de_unidad_fraccion";
-    private static String COL_FLATFRACCIONADO= "in_prod_fraccionado";
-    private static String COL_VAFRACCION= "va_fraccion";
-    private static String COL_CODLABORATORIO = "co_laboratorio";
-    private static String COL_DESCLABORATORIO = "de_laboratorio";
+    @Insert
+    public void insert(ProductoInventario... productoInventario);
 
-    private InventarioDatabase inventarioDatabase;
+    @Update
+    public void update(ProductoInventario... productoInventario);
 
-    public ProductoInventarioDAO(Context context){
-        inventarioDatabase = new InventarioDatabase(context);
-    }
+    @Delete
+    public void delete(ProductoInventario... productoInventario);
 
-    public void insertarProducto(Producto producto){
-        SQLiteDatabase db = inventarioDatabase.getWritableDatabase();
+    @Query("select * from ProductoInventario")
+    public List<ProductoInventario> getProductoInventario();
 
-        ContentValues valores = new ContentValues();
-        //valores.put()
-    }
+    @Query("select * from ProductoInventario where co_producto = :codProducto")
+    public ProductoInventario getProdInventarioWithCodigo(String codProducto);
+
 
 }

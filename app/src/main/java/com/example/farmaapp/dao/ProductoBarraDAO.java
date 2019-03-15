@@ -1,26 +1,31 @@
 package com.example.farmaapp.dao;
 
-import android.content.Context;
+import android.arch.persistence.room.Dao;
+import android.arch.persistence.room.Delete;
+import android.arch.persistence.room.Insert;
+import android.arch.persistence.room.Query;
+import android.arch.persistence.room.Update;
 
-import com.example.farmaapp.db.InventarioDatabase;
+import com.example.farmaapp.entity.ProductoBarra;
 
-public class ProductoBarraDAO {
+import java.util.List;
 
-    private static String NOMBRE_TABLA = "Producto";
+@Dao
+public interface ProductoBarraDAO {
 
-    private static String COL_CODPRODUCTO = "co_producto";
-    private static String COL_DEPRODUCTO = "de_producto";
-    private static String COL_DEUNIDAD = "de_unidad";
-    private static String COL_DEUNIDADFRACCION = "de_unidad_fraccion";
-    private static String COL_INPRODFRACCIONADO = "in_prod_fraccionado";
-    private static String COL_VAFRACCION= "va_fraccion";
-    private static String COL_COLABORATORIO = "co_laboratorio";
-    private static String COL_DELABORATORIO = "de_laboratorio";
+    @Insert
+    public void insert(ProductoBarra... productoBarras);
 
-    private InventarioDatabase inventarioDatabase;
+    @Update
+    public void update(ProductoBarra... productoBarras);
 
-    public ProductoBarraDAO(Context context){
-        inventarioDatabase = new InventarioDatabase(context);
-    }
+    @Delete
+    public void delete(ProductoBarra... productoBarras);
+
+    @Query("select * from ProductoBarra")
+    public List<ProductoBarra> getProductoBarra();
+
+    @Query("select * from ProductoBarra where co_barra = :codBarra")
+    public ProductoBarra getProductoWithBarra(String codBarra);
 
 }

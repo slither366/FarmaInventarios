@@ -7,4 +7,5 @@
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorSuave">#bdbdbd</color>
     <color name="colorBlack">#000000</color>
+    <color name="coloNumero">#303F9F</color>
 </resources>

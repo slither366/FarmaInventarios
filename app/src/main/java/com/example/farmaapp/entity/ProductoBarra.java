@@ -1,14 +1,21 @@
 package com.example.farmaapp.entity;
 
+import android.arch.persistence.room.ColumnInfo;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
+@Entity(tableName = "productobarra")
 public class ProductoBarra {
 
+    @PrimaryKey
+    @ColumnInfo(name = "co_barra")
+    @NonNull
     private String coBarra;
-    private String coProducto;
 
-    public ProductoBarra(String coBarra, String coProducto) {
-        this.coBarra = coBarra;
-        this.coProducto = coProducto;
-    }
+    @ColumnInfo(name = "co_producto")
+    @NonNull
+    private String coProducto;
 
     public String getCoBarra() {
         return coBarra;
